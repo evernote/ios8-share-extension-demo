@@ -50,7 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = NSString(string: "Evernote Share Extension Demo")
+        self.title = NSString(string: "Evernote Share Extension Demo") as String
         
         // Register the UITableViewCell class with the tableView
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier)! as UITableViewCell
         
         cell.textLabel?.text = self.actionArray[indexPath.row]
         
@@ -135,7 +135,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func htmlStringFromFile(name: NSString) -> NSString? {
-        var filePath = NSBundle.mainBundle().pathForResource(name, ofType: "html")
-        return String(contentsOfFile: filePath!, encoding: NSUTF8StringEncoding, error: nil)
+        let filePath = NSBundle.mainBundle().pathForResource(name as String, ofType: "html")
+        return try! String(contentsOfFile: filePath!, encoding: NSUTF8StringEncoding)
     }
 }
